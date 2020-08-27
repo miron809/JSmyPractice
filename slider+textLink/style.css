@@ -1,0 +1,63 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.wrapper {
+  overflow: hidden;
+  max-width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("img/y-so-serious-white.png");
+  font-family: Arial;
+  font-size: 20px;
+}
+
+.container {
+  display: flex;
+}
+.container .links {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.container .links li {
+  color: #fff;
+  padding: 10px 15px;
+  min-width: 300px;
+  background: #8836BF;
+  border-bottom: 1px solid #A993BF;
+  cursor: pointer;
+}
+.container .links li:hover, .container .links li.active {
+  background: #5B2A8C;
+}
+.container .links li:last-child {
+  border-bottom: none;
+}
+.container .slider-holder {
+  padding: 0 10px;
+  background: #fff;
+}
+.container .slider-holder .slide {
+  width: 400px;
+  height: 400px;
+  overflow: hidden;
+  display: none;
+}
+.container .slider-holder .slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+.container .slider-holder .slide.active {
+  display: block;
+}
+
+/*# sourceMappingURL=style.css.map */
