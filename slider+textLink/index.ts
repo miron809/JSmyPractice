@@ -35,7 +35,6 @@ const data = {
 
 
 const slider = new Slider('#slider', data, {
-  delay: 1000
+  delay: 2000,
+  animation: 'animate__fadeIn'
 } )
-
-window.slider = slider;

@@ -1,4 +1,4 @@
-const getHtmlTemplate = (data) => {
+const getHtmlTemplate = (data, options) => {
   const links = Object.keys(data).map((item, index) => {
     return `<li class="${index === 0 ? 'active' : ''}" data-accession="${item}">${item}</li>`
   })
@@ -7,7 +7,7 @@ const getHtmlTemplate = (data) => {
     const sliderItems = []
     value.forEach((slide, index) => {
       sliderItems.push(`
-          <div class="slider__item ${indx === 0 && index === 0 ? 'active' : ''}" data-accession="${key}">
+          <div class="slider__item animate__animated ${options.animation} ${indx === 0 && index === 0 ? 'active' : ''}" data-accession="${key}">
               ${slide}
           </div>
       `)
@@ -33,7 +33,7 @@ export class Slider {
   itemsArr;
   interval;
 
-  constructor(private $el, private data, private options) {
+  constructor(private $el, private data, private options = {delay: 1000, animation: ''}) {
     this.render();
     this.initVars();
     this.start();
@@ -43,7 +43,7 @@ export class Slider {
   private render() {
     this.$el = document.querySelector(this.$el);
     this.$el.classList.add('slider');
-    this.$el.innerHTML = getHtmlTemplate(this.data);
+    this.$el.innerHTML = getHtmlTemplate(this.data, this.options);
   }
 
   private initVars() {

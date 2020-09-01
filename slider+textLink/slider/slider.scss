@@ -29,16 +29,13 @@
     }
   }
 
-  &__slides {
-    padding: 0 10px;
-    background: #fff;
-  }
-
   &__item {
-    width: 300px;
+    width: 320px;
     height: 300px;
     overflow: hidden;
     display: none;
+    padding: 0 10px;
+    background: #fff;
 
     img {
       width: 100%;
