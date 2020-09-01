@@ -42,6 +42,7 @@ export class Slider {
 
   private render() {
     this.$el = document.querySelector(this.$el);
+    this.$el.classList.add('slider');
     this.$el.innerHTML = getHtmlTemplate(this.data);
   }
 
@@ -90,7 +91,7 @@ export class Slider {
   start(i= 0) {
     let indx = i;
 
-    this.interval = setInterval( () => {
+    const startFunc = () => {
       if (indx < this.itemsArr.length) {
         this.removeActive();
         this.addActive(indx);
@@ -99,7 +100,10 @@ export class Slider {
         this.start();
       }
       indx++;
-    }, this.options.delay)
+    }
+    startFunc();
+
+    this.interval = setInterval( startFunc, this.options.delay)
 
   }
 
