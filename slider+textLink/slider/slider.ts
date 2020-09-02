@@ -3,7 +3,7 @@ const getHtmlTemplate = (data, options) => {
     return `<li class="${index === 0 ? 'active' : ''}" data-accession="${item}">${item}</li>`
   })
 
-  const content = Object.entries(data).map(([key, value], indx) => {
+  const content = Object.entries(data).map(([key, value]: [string, []], indx) => {
     const sliderItems = []
     value.forEach((slide, index) => {
       sliderItems.push(`
