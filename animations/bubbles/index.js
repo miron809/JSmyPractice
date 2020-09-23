@@ -96,8 +96,8 @@ class Particles {
 
       particle[i] = {
         radius: Particles.rand(this.minRadius, this.maxRadius),
-        xPos: Particles.rand(0, canvas.width),
-        yPos: Particles.rand(0, canvas.height),
+        xPos: Particles.rand(0, this.canvas.width),
+        yPos: Particles.rand(0, this.canvas.height),
         xVelocity: Particles.rand(this.minSpeed, this.maxSpeed),
         yVelocity: Particles.rand(this.minSpeed, this.maxSpeed),
         color: 'rgba(' + color + ',' + Particles.rand(this.minOpacity, this.maxOpacity) + ')'
