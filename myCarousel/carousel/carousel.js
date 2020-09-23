@@ -62,39 +62,18 @@ export class Carousel {
     if (this.position < 0) {
       this.position += this.slideWidth;
       this.#goToPosition()
+    } else if (this.loop) {
+      this.#goToPosition(-this.wrapperWidth)
     }
-
-    if (this.loop) {
-      if (this.position === 0) {
-        this.#goToPosition(-this.wrapperWidth)
-        this.addOneHiddenSlide()
-      }
-    }
-
-    console.log(this.position)
   }
 
   #moveNext() {
     if (this.position > -(this.wrapperWidth)) {
       this.position -= this.slideWidth;
       this.#goToPosition()
-    } else if (this.position < -(this.wrapperWidth)) {
+    } else if (this.loop) {
       this.#goToPosition(0)
     }
-
-    if (this.loop) {
-      if (this.position === -(this.wrapperWidth)) {
-        this.addOneHiddenSlide()
-      }
-    }
-
-
-    console.log(this.position)
-    console.log(-(this.wrapperWidth))
-  }
-
-  addOneHiddenSlide() {
-    this.position -= this.slideWidth;
   }
 
   #setInterval() {
