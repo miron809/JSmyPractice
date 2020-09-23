@@ -1,3 +1,5 @@
+@import "carousel/carousel";
+
 * {
   box-sizing: border-box;
 }
@@ -11,35 +13,6 @@ img {
   height: auto;
   object-fit: contain;
   display: block;
+  max-height: 400px;
 }
 
-#carousel {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow: hidden;
-  position: relative;
-  .carousel-items {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    display: flex;
-    transition: transform .3s;
-    .carousel-item {
-      overflow: hidden;
-      display: flex;
-      flex-shrink: 0;
-      //margin: 0 1%;
-      width: 33%;
-    }
-  }
-
-  .navigation {
-    padding: 20px 0;
-    button {
-      margin: 0 20px;
-    }
-  }
-
-}
