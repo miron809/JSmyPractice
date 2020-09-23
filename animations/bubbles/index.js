@@ -61,8 +61,8 @@ Particles.prototype._rand = function(min, max){
  */
 Particles.prototype.render = function(){
   var self = this,
-    wHeight = this.canvas.clientHeight,
-    wWidth = this.canvas.clientWidth;
+    wHeight = canvas.clientHeight,
+    wWidth = canvas.clientWidth;
 
   self.canvas.width = wWidth;
   self.canvas.height = wHeight;
