@@ -90,9 +90,6 @@ export class Carousel {
   }
 
   #moveNext() {
-    console.log('Position', this.position)
-    console.log('Wrapper', this.wrapperWidth)
-
     if (this.position > -(this.wrapperWidth)) {
       this.position -= this.slideWidth;
       this.currentSlide += 1
@@ -128,8 +125,6 @@ export class Carousel {
 
   #moveWrapper() {
     this.$wrapper.style.transform = `translateX(${this.position}px)`;
-
-    // console.log(this.currentSlide)
   }
 
 

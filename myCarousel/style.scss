@@ -11,8 +11,12 @@ h1 {
 img {
   max-width: 100%;
   height: auto;
-  object-fit: contain;
+  object-fit: cover;
   display: block;
   max-height: 400px;
+  width: 100%;
 }
 
+.crsl-item {
+  padding: 0 20px;
+}
