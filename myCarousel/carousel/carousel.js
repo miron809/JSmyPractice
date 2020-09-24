@@ -24,8 +24,9 @@ export class Carousel {
     this.startFrom          = this.options.startFrom
     this.loop               = this.options.loop
 
-    this.carouselWidth      = this.$carousel.offsetWidth
-    this.slideWidth         = this.carouselWidth / this.slidesPerView
+    this.carouselWidth      = null
+    this.slideWidth         = null
+    this.wrapperWidth       = null
 
     this.$wrapper           = this.$carousel.querySelector(`.${this.options.wrapperClass}`)
     this.$slides            = this.$carousel.querySelectorAll(`.${this.options.itemClass}`)
@@ -33,7 +34,7 @@ export class Carousel {
     this.$nextEl            = this.$carousel.querySelector(`#${this.options.navigation.nextElId}`)
 
     this.position           = 0;
-    this.wrapperWidth       = this.$slides.length * this.slideWidth - this.slideWidth * this.slidesPerView
+    this.currentSlide       = 0;
 
     this.init()
 
@@ -41,14 +42,33 @@ export class Carousel {
       this.interval = null;
       this.#setInterval();
     }
+
+    if (this.startFrom > 0) {
+      this.currentSlide = this.startFrom
+      this.#goToSlide(this.startFrom)
+    }
   }
 
   init() {
-    this.#setItemsPerView();
+    this.#getCarouselWidth()
+    this.#setItemsPerView()
 
     this.$prevEl.addEventListener('click', this.#movePrev.bind(this))
     this.$nextEl.addEventListener('click', this.#moveNext.bind(this))
+
+    window.addEventListener('resize', () => {
+      this.#getCarouselWidth()
+      this.#setItemsPerView()
+      this.#goToSlide(this.currentSlide)
+    })
   }
+
+  #getCarouselWidth() {
+    this.carouselWidth      = this.$carousel.offsetWidth
+    this.slideWidth         = +(this.carouselWidth / this.slidesPerView).toFixed(0)
+    this.wrapperWidth       = +(this.$slides.length * this.slideWidth - this.slideWidth * this.slidesPerView).toFixed(0)
+  }
+
 
 
   // Set carousel items per view
@@ -61,18 +81,25 @@ export class Carousel {
   #movePrev() {
     if (this.position < 0) {
       this.position += this.slideWidth;
+      this.currentSlide -= 1
       this.#goToPosition()
     } else if (this.loop) {
       this.#goToPosition(-this.wrapperWidth)
+      this.currentSlide = this.$slides.length - this.slidesPerView
     }
   }
 
   #moveNext() {
+    console.log('Position', this.position)
+    console.log('Wrapper', this.wrapperWidth)
+
     if (this.position > -(this.wrapperWidth)) {
       this.position -= this.slideWidth;
+      this.currentSlide += 1
       this.#goToPosition()
     } else if (this.loop) {
       this.#goToPosition(0)
+      this.currentSlide = 0
     }
   }
 
@@ -86,12 +113,23 @@ export class Carousel {
 
   #goToPosition(position = this.position) {
     this.position = position;
-    this.$wrapper.style.transform = `translateX(${this.position}px)`;
+    this.#moveWrapper()
   }
 
   #goToSlide(number = this.position) {
-    this.position = this.slideWidth * number;
+    if (number > this.$slides.length - this.slidesPerView) {
+      this.position = -this.wrapperWidth
+      this.currentSlide = this.$slides.length - this.slidesPerView
+    } else {
+      this.position = -this.slideWidth * number;
+    }
+    this.#moveWrapper()
+  }
+
+  #moveWrapper() {
     this.$wrapper.style.transform = `translateX(${this.position}px)`;
+
+    // console.log(this.currentSlide)
   }
 
 
