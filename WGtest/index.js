@@ -19,13 +19,14 @@ function start() {
   changeStartBtn('pause')
 
   progressMock = setInterval(() => {
-    if (state.progress >= 100) {
+    if (state.progress >= 10) {
       stop()
       if (gameIdx < gamesList.length - 1) {
         sayNewGames()
       } else {
         addStatusImage()
         alert('You have downloaded all the games! Enjoy!')
+        progressWrap.classList.remove('active')
       }
     } else {
       state.progress += 1
@@ -47,7 +48,7 @@ function updateProgressText() {
 }
 
 function updateProgressBar() {
-  progressWrap.style.visibility = 'visible'
+  progressWrap.classList.add('active')
   progressBar.classList.add('progress-bar-animated')
   progressBar.style.width = (`${state.progress}%`)
   progressBar.innerText = `${state.progress}%`
@@ -56,7 +57,7 @@ function updateProgressBar() {
 function sayNewGames() {
   addStatusImage()
 
-  const answer = confirm(`
+  const answer = window.confirm(`
     ${gamesList[gameIdx].innerText} has been successfully downloaded!
     Would you like to download next game?`)
   if (answer) {

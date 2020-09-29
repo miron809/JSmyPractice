@@ -8,10 +8,6 @@ body, html {
   box-sizing: border-box;
 }
 
-button {
-
-}
-
 ul {
   list-style-type: none;
   margin: 0;
@@ -32,10 +28,12 @@ ul li {
   background-size: 0;
 }
 
-h1 {
-  align-self: center;
+#progress-wrap {
+  transform: rotateX(90deg);
+  transition: transform .5s;
 }
 
-#progress-wrap {
-  visibility: hidden;
+#progress-wrap.active {
+  transform: rotateX(0);
+  transition: transform .5s;
 }
