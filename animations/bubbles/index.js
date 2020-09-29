@@ -112,7 +112,7 @@ class Particles {
 
   /**
    * Draws particles on canvas
-   * @param  {array} Particle array from createCircle method
+   * @param  {array} particle array from createCircle method
    * @param  {number} i value from createCircle method
    * @method draw
    */
