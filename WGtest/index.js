@@ -19,7 +19,7 @@ function start() {
   changeStartBtn('pause')
 
   progressMock = setInterval(() => {
-    if (state.progress >= 10) {
+    if (state.progress >= 100) {
       stop()
       if (gameIdx < gamesList.length - 1) {
         sayNewGames()
