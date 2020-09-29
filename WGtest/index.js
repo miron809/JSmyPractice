@@ -1,35 +1,75 @@
 const startBtn = document.getElementById('start-button')
 const gamesList = document.querySelectorAll('.games li')
 const progressBar = document.getElementById('progress-bar')
+const progressWrap = document.getElementById('progress-wrap')
+const gamesTitles = [];
 
-isActiveDownloads = false;
+gamesList.forEach(game => gamesTitles.push(game.innerText))
 
+let isActiveDownloads = false;
+let gameIdx = 0;
+
+let progressMock;
 const state = {
   progress: 0
 };
-let progressMock;
 
 function start() {
-  isActiveDownloads = true;
+  isActiveDownloads = true
   changeStartBtn('pause')
+
   progressMock = setInterval(() => {
-    if (state.progress >= 10) {
+    if (state.progress >= 100) {
       stop()
+      if (gameIdx < gamesList.length - 1) {
+        sayNewGames()
+      } else {
+        addStatusImage()
+        alert('You have downloaded all the games! Enjoy!')
+      }
     } else {
       state.progress += 1
+      updateProgressText()
+      updateProgressBar()
     }
-
-    console.log(state.progress)
   }, 300);
-
 }
 
 function stop() {
   isActiveDownloads = false;
   changeStartBtn('play')
+  progressBar.classList.remove('progress-bar-animated')
   return clearInterval(progressMock);
 }
 
+function updateProgressText() {
+  gamesList[gameIdx].style.backgroundSize = (`${state.progress}%`)
+}
+
+function updateProgressBar() {
+  progressWrap.style.visibility = 'visible'
+  progressBar.classList.add('progress-bar-animated')
+  progressBar.style.width = (`${state.progress}%`)
+  progressBar.innerText = `${state.progress}%`
+}
+
+function sayNewGames() {
+  addStatusImage()
+
+  const answer = confirm(`
+    ${gamesList[gameIdx].innerText} has been successfully downloaded!
+    Would you like to download next game?`)
+  if (answer) {
+    gameIdx += 1
+    state.progress = 0
+    start()
+  }
+}
+
+function addStatusImage() {
+  const successImage = `<i style="color: green; margin-left: 10px;" class="fa fa-check-circle"></i>`;
+  gamesList[gameIdx].innerHTML = gamesTitles[gameIdx] + successImage;
+}
 
 /**
  * Change icon for button

@@ -29,9 +29,13 @@ ul li {
   background-color: #000;
   background-image: linear-gradient(45deg, #f8a305, #c60510);
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: 0;
 }
 
 h1 {
   align-self: center;
+}
+
+#progress-wrap {
+  visibility: hidden;
 }
